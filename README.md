@@ -23,7 +23,10 @@
     "UoooBarry/novel-reader.nvim",
     ft = "text", -- 仅对文本文件加载
     config = function()
-        require("novel-reader").setup()
+        require("novel-reader").setup({
+            -- 默认章节匹配模式
+            default_pattern = "第\\d\\+章",
+        })
     end
 }
 ```
@@ -41,15 +44,6 @@
 | `NovelReaderSetChapter` | 跳转到指定章节 | `:NovelReaderSetChapter 5` |
 | `NovelReaderCacheStatus` | 显示缓存状态 | `:NovelReaderCacheStatus` |
 
-## 配置
-
-```lua
-require("novel-reader").setup({
-    -- 默认章节匹配模式
-    default_pattern = "第\\d\\+章",
-
-})
-```
 
 ---
 
@@ -78,7 +72,10 @@ Using [Lazy.nvim](https://github.com/folke/lazy.nvim):
     "UoooBarry/novel-reader.nvim",
     ft = "text", -- Load only for text files
     config = function()
-        require("novel-reader").setup()
+        require("novel-reader").setup({
+            -- Default chapter pattern
+            default_pattern = "Chapter\\s\\d+",
+        })
     end
 }
 ```
@@ -96,12 +93,4 @@ Customize your keymap to suit your preferences.
 | `NovelReaderSetChapter` | Jump to specific chapter | `:NovelReaderSetChapter 5` |
 | `NovelReaderCacheStatus` | Show cache status | `:NovelReaderCacheStatus` |
 
-## Configuration
-
-```lua
-require("novel-reader").setup({
-    -- Default chapter pattern
     default_pattern = "Chapter\\s\\d+",
-    
-})
-```
