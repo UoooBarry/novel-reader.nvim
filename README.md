@@ -20,7 +20,7 @@
 
 ```lua
 {
-    "your-username/novel-reader.nvim",
+    "UoooBarry/novel-reader.nvim",
     ft = "text", -- 仅对文本文件加载
     config = function()
         require("novel-reader").setup()
@@ -75,7 +75,7 @@ Using [Lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-    "your-username/novel-reader.nvim",
+    "UoooBarry/novel-reader.nvim",
     ft = "text", -- Load only for text files
     config = function()
         require("novel-reader").setup()
