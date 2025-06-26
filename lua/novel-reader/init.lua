@@ -18,7 +18,7 @@ function M.setup(user_config)
 
     vim.api.nvim_create_augroup('NovelReaderAutoCmds', { clear = true })
 
-    vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         pattern = "*.txt",
         callback = function()
             M.build_cache()
@@ -33,7 +33,7 @@ function M.setup(user_config)
             M.build_cache()
         end
     })
-    vim.api.nvim_create_autocmd({ "BufWritePost", "VimLeave" }, {
+    vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
         pattern = "*.txt",
         callback = function()
             config.save_from_state()
