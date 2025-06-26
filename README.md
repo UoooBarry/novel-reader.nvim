@@ -45,6 +45,20 @@
 | `NovelReaderCacheStatus` | 显示缓存状态 | `:NovelReaderCacheStatus` |
 
 
+## API接口
+
+| 函数                             | 描述                                                          |
+| ------------------------------------------ | -------------------------------------------------------------------------- |
+| `require('novel-reader').prev_chapter()`   | 跳转到上一章                                         |
+| `require('novel-reader').next_chapter()`   | 跳转到下一章                                             |
+| `require('novel-reader').set_chapter(num)` | 跳转到指定章节 |
+
+
+```lua
+vim.keymap.set('n', '|', require('novel-reader').prev_chapter)
+vim.keymap.set('n', '\\', require('novel-reader').next_chapter)
+```
+
 ---
 
 # NovelReader.nvim - Novel Reading Plugin
@@ -93,4 +107,17 @@ Customize your keymap to suit your preferences.
 | `NovelReaderSetChapter` | Jump to specific chapter | `:NovelReaderSetChapter 5` |
 | `NovelReaderCacheStatus` | Show cache status | `:NovelReaderCacheStatus` |
 
-    default_pattern = "Chapter\\s\\d+",
+
+## API Reference
+
+| 函数                             | 描述                                                          |
+| ------------------------------------------ | -------------------------------------------------------------------------- |
+| `require('novel-reader').prev_chapter()`   | Jump to previous chapter                                          |
+| `require('novel-reader').next_chapter()`   | Jump to next chapter                                              |
+| `require('novel-reader').set_chapter(num)` | Jump to specific chapter Param: `num` (chapter number) |
+
+
+```lua
+vim.keymap.set('n', '|', require('novel-reader').prev_chapter)
+vim.keymap.set('n', '\\', require('novel-reader').next_chapter)
+```

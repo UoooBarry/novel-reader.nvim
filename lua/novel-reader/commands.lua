@@ -1,18 +1,10 @@
 local state = require('novel-reader.state')
 local regex = require('novel-reader.regex')
+local api = require('novel-reader.api')
 
 local M = {}
 
 function M.setup()
-    local function gotoChapter()
-        local line_num = state.get_location()
-        if line_num then
-            vim.api.nvim_win_set_cursor(0, { line_num, 0 })
-        else
-            vim.notify("No more chapters found", vim.log.levels.WARN)
-        end
-    end
-
     vim.api.nvim_create_user_command('NovelReaderSetRegex', function(opts)
         if not opts.args or opts.args == "" then
             vim.notify("Error: Please provide a regex pattern", vim.log.levels.ERROR)
@@ -35,17 +27,13 @@ function M.setup()
 
 
     vim.api.nvim_create_user_command('NovelReaderNextChapter', function()
-        state.next_chapter()
-
-        gotoChapter()
+        api.next_chapter()
     end, {
         desc = "Go to next chapter"
     })
 
     vim.api.nvim_create_user_command('NovelReaderPrevChapter', function()
-        state.prev_chapter()
-
-        gotoChapter()
+        api.prev_chapter()
     end, {
         desc = "Go to previous chapter"
     })
@@ -68,12 +56,7 @@ function M.setup()
     })
 
     vim.api.nvim_create_user_command('NovelReaderSetChapter', function(opts)
-        if not opts.args and opts.args:match("^%-?%d+$") then
-            vim.notify("Error: Please provide a valid chapter number", vim.log.levels.ERROR)
-        end
-
-        state.set_chapter(tonumber(opts.args))
-        gotoChapter()
+        api.set_chapter(opts.args)
     end, {
         nargs = 1,
         complete = function(ArgLead, CmdLine, CursorPos)

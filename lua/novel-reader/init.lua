@@ -2,9 +2,13 @@ local state = require("novel-reader.state")
 local cache = require("novel-reader.cache")
 local regex = require("novel-reader.regex")
 local config = require('novel-reader.config')
+local api = require('novel-reader.api')
 
 local M = {
-    _chapter_update_timer = nil
+    _chapter_update_timer = nil,
+    prev_chapter = api.prev_chapter,
+    next_chapter = api.next_chapter,
+    set_chapter = api.set_chapter
 }
 
 function M.setup(user_config)
