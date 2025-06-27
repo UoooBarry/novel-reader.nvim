@@ -11,16 +11,22 @@ function M.goto_chapter()
     end
 end
 
-function M.prev_chapter()
-    state.prev_chapter()
+function M.get_current_chapter()
+    local row = vim.api.nvim_win_get_cursor(0)[1]
+    local chapter = state.get_current_chapter_by_row(row)
 
-    M.goto_chapter()
+    return chapter
+end
+
+function M.prev_chapter()
+    local chapter = M.get_current_chapter()
+    M.set_chapter(chapter - 1)
 end
 
 function M.next_chapter()
-    state.next_chapter()
+    local chapter = M.get_current_chapter()
 
-    M.goto_chapter()
+    M.set_chapter(chapter + 1)
 end
 
 function M.set_chapter(num)

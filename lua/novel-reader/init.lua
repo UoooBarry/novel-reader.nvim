@@ -5,10 +5,10 @@ local config = require('novel-reader.config')
 local api = require('novel-reader.api')
 
 local M = {
-    _chapter_update_timer = nil,
     prev_chapter = api.prev_chapter,
     next_chapter = api.next_chapter,
-    set_chapter = api.set_chapter
+    set_chapter = api.set_chapter,
+    get_current_chapter = api.get_current_chapter
 }
 
 function M.setup(user_config)
@@ -40,22 +40,6 @@ function M.setup(user_config)
             config.save_to_file()
         end
     })
-    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        pattern = "*.txt",
-        group = 'NovelReaderAutoCmds',
-        callback = function()
-            M.update_chapter_debounced()
-        end
-    })
-    vim.api.nvim_create_autocmd('BufLeave', {
-        pattern = "*.txt",
-        group = 'NovelReaderAutoCmds',
-        callback = function()
-            if M._chapter_update_timer and M._chapter_update_timer:is_active() then
-                M._chapter_update_timer:stop()
-            end
-        end
-    })
 end
 
 function M.build_cache()
@@ -64,20 +48,6 @@ function M.build_cache()
         regex.chapter_pattern
     )
     state.update_cache(locations)
-end
-
-function M.update_chapter_debounced()
-    if M._chapter_update_timer then
-        M._chapter_update_timer:stop()
-    else
-        M._chapter_update_timer = vim.loop.new_timer()
-    end
-
-    M._chapter_update_timer:start(1000, 0, vim.schedule_wrap(function()
-        local row = vim.api.nvim_win_get_cursor(0)[1]
-        local chapter = state.get_current_chapter_by_row(row)
-        state.set_chapter(chapter)
-    end))
 end
 
 return M

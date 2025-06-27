@@ -4,16 +4,6 @@ local M = {
     current_index = 1,
 }
 
-function M.next_chapter()
-    M.set_chapter(M.current_chapter + 1)
-end
-
-function M.prev_chapter()
-    if M.current_chapter > 1 then
-        M.set_chapter(M.current_chapter - 1)
-    end
-end
-
 function M.set_chapter(num)
     if type(num) == "number" and num > 0 then
         M.current_chapter = math.floor(num)

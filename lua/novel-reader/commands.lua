@@ -49,7 +49,7 @@ function M.setup()
         vim.notify(string.format(
             "Chapter cache: %d locations, current index: %d",
             #state.chapter_locations,
-            state.current_chapter_index or 0
+            api.get_current_chapter() or 0
         ), vim.log.levels.INFO)
     end, {
         desc = "Show chapter cache status"
