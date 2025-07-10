@@ -39,7 +39,7 @@ function M.setup()
     })
 
     vim.api.nvim_create_user_command('NovelReaderCurrentChapter', function()
-        local current = state.get_current_chapter()
+        local current = api.get_current_chapter()
         vim.notify(string.format("Current chapter: %d", current), vim.log.levels.INFO)
     end, {
         desc = "Show current chapter number"

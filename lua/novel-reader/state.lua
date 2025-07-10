@@ -20,10 +20,6 @@ function M.get_location()
     return M.chapter_locations[M.current_index]
 end
 
-function M.get_current_chapter()
-    return M.current_chapter
-end
-
 function M.get_current_chapter_by_row(row)
     local locations = M.chapter_locations
     if #locations == 0 then return 0 end
